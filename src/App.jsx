@@ -2,16 +2,18 @@ import { useState, useEffect } from 'react';
 import './css/App.css';
 import Spinner from './components/Spinner';
 
-function App() {
+export default function App() {
+    // states
     const [theQuote, setTheQuote] = useState({ quote: '', author: '' });
     const [loading, setLoading] = useState(false);
 
+    // functions
     const controller = new AbortController();
     const fetchedQuotes = async () => {
         try {
             setLoading(true);
             const res = await fetch(
-                'https://quoteslate.vercel.app/api/quotes/random?tags=motivation,wisdom',
+                'https://quoteslate.vercel.app/api/quotes/random?tags=motivation',
                 { signal: controller.signal }
             );
             const data = await res.json();
@@ -54,5 +56,3 @@ function App() {
         </div>
     );
 }
-
-export default App;
